@@ -1,0 +1,282 @@
+doctype html
+head
+  // Required meta tags
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  // Bootstrap CSS
+  link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin='anonymous')
+  title Dashboard | Pug Application
+  link(rel="stylesheet" href='../main.css')
+
+  body 
+    p#obj(hidden=true) #{rs} 
+    p #{success} 
+    p#loginCheck(hidden=true) #{ans}
+    h1.text-center.my-3 Quote Application
+    //- .d-flex.align-items-end.justify-content-end.mx-4
+    //-   button.btn.btn-primary Add Quote
+    .toast.toastCss.fade(role='alert' aria-live='assertive' aria-atomic='')
+      .toast-header
+        strong.me-auto Quotes App
+        small 11 mins ago
+        button.btn-close(type='button' data-bs-dismiss='toast' aria-label='Close')
+      .toast-body.toastDescription Hello, world! This is a toast message.
+
+    .d-flex.align-items-end.justify-content-center.w-100.px-4.my-5
+      button.btn.btn-primary(type='button' data-bs-toggle='modal' data-bs-target='#exampleModal')| ~~ Add The Quote ~~
+      button.btn.btn-outline-danger.mx-2.logoutBtn logout
+      button.btn.btn-success.mx-2.blogsPart Blogs
+      button.btn.btn-warning.mx-2.usersMenu Users Menu
+    #exampleModal.modal.fade.check(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
+      .modal-dialog.modal-dialog-centered
+        .modal-content
+          .modal-header
+            h5#exampleModalLabel.modal-title Modal title
+            button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+          .modal-body
+            form 
+              .form-floating.pb-3.d-flex.w-100
+                input#username.form-control.w-100(type='text' name='username' placeholder='name@example.com')
+                label(for='username') Username
+              .form-floating.pb-3.d-flex.w-100 
+                textarea#quote.form-control(placeholder='Leave a comment here' style='height: 100px' name='quote', Required)
+                label(for='floatingTextarea2') Quote...
+              button.btn.btn-primary Add Quote
+          .modal-footer
+            button.btn.btn-secondary.close(type='button' data-bs-dismiss='modal') Close
+
+    .d-flex.justify-content-center.align-items-center.w-100
+      .d-flex.flex-wrap.gap-5.w-75.justify-content-center.mb-4.cardAdd
+
+        //- .card.w-25
+        //-   .card-header
+        //-     | Quote
+        //-   .card-body
+        //-     blockquote.blockquote.mb-0
+        //-       p A well-known quote, contained in a blockquote element.
+        //-       footer.blockquote-footer
+        //-         | Someone famous in 
+        //-         cite(title='Source Title') Source Title     
+        //- .card.w-25
+        //-   .card-header
+        //-     | Quote
+        //-   .card-body
+        //-     blockquote.blockquote.mb-0
+        //-       p A well-known quote, contained in a blockquote element.
+        //-       footer.blockquote-footer
+        //-         | Someone famous in 
+        //-         cite(title='Source Title') Source Title
+        //- .card.w-25
+          .card-header
+            | Quote
+          .card-body
+            blockquote.blockquote.mb-0
+              p A well-known quote, contained in a blockquote element.
+              footer.blockquote-footer
+                | Someone famous in 
+                cite(title='Source Title') Source Title
+      .show
+        form(action='/login' method='post') 
+    .d-flex.justify-content-center.align-items-center.w-100.flex-column
+      .user-menu.d-none.justify-content-center.align-items-center.flex-column.w-50.border.p-4.mb-4
+        .w-100.pb-3 
+          h1 User Update
+        .form-floating.pb-3.d-flex.w-100
+          input#username_user.form-control.w-100(type='text' name='username' placeholder='name@example.com')
+          label(for='username') Username
+          input#id_user(type="hidden" name="_id")
+        .form-floating.pb-3.d-flex.w-100
+          input#email_user.form-control.w-100(type='email' name='email' placeholder='name@example.com')
+          label(for='email') Email address
+        .form-floating.pb-3.w-100
+          input#password_user.form-control(type='text' name='password' placeholder='Password')
+          label(for='password') Password
+        .w-100 
+          input#userUpdate.py-2.rounded.btn-primary.w-100(type="submit" value="Submit")
+        .usersQuote.w-100
+          .mt-4
+            h1 Your Quotes...
+        table.w-100.mt-4#tr
+          th Quotes 
+          th Delete
+
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js')
+  script(src='https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js' integrity='sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p' crossorigin='anonymous')
+  script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js' integrity='sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF' crossorigin='anonymous')
+  script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js' integrity='sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM' crossorigin='anonymous')
+
+
+
+  script.
+    let loginId,obj
+    obj = document.getElementById('obj').innerHTML
+    console.log(obj)
+    loginId = document.getElementById('loginCheck').innerHTML
+    unm = document.getElementById('username')
+    unm.value = obj.trim()
+    console.log(loginId)
+      if(loginId == "true"){
+        console.log("its false man")
+        console.log(loginId+"its falseman")
+      }
+      if(loginId == "false"){
+        window.location.href='http://localhost:3000/'
+      }
+    $(document).ready(function () {
+       $.fn.deleteBtn = function (id){
+        var formData = {
+          _id:id
+        }
+          var clickedOk = confirm("confirm - Do you want to logout now...");
+        if(clickedOk){
+          $.ajax({
+          type:'DELETE',
+          url:`deleteUser/${id}`,
+          data:formData,
+          datatype:'JSON',
+          encode:true
+        }).done(function(data) {
+            getData()
+          console.log(data)
+          setTimeout(() =>{
+            $(".toastDescription").html("Quote Deleted Succesfully...")
+            $(".toastCss").addClass("show")
+            },)
+            setTimeout(() =>{
+            $(".toastCss").removeClass("show")
+            },2000)
+        })
+          };
+      }
+
+      
+      
+    //- $('#deleteId').on('click',deleteBtn())
+      function getData(){
+        $.ajax({
+          type:'GET',
+          url:"getall"
+        }).done(function(data){
+          $('#tr').html('')
+          $('.cardAdd').html('')
+          data.forEach((e,i) =>{
+            $(".cardAdd").append(`<div class="card" style="width:19.8rem"><div class="card-header">Quote</div><div class="card-body"><blockquote class="blockquote mb-0"><p>${e.quote}</p><footer class="blockquote-footer">${e.username} <cite title="Source Title"></cite></footer></blockquote></div></div>`)
+            $("#tr").append(`<tr><td>${e.quote}</td><td><button class='btn btn-danger' id='deleteId'onClick="$(this).deleteBtn('${e._id}')">Delete</button></td></tr>`)
+            console.log(data)
+          })
+        })
+      }
+    getData()
+
+        $("form").submit(function (event) {
+        var formData = {
+          username: $("#username").val(),
+          quote: $("#quote").val(),
+        };
+
+        $.ajax({
+          type: "POST",
+          url: "addquote",
+          data: formData,
+          dataType: "json",
+          encode: true,
+        }).done(function (data) {
+          getData()
+
+          console.log(data);
+          if(data.acknowledged == true){
+            $(".close").click()
+            console.log("data done")
+            setTimeout(() =>{
+            $(".toastDescription").html("Congratulations..!!!! Quote Added")
+            $(".toastCss").addClass("show")
+            $(".blogsPart").click()
+            },)
+            setTimeout(() =>{
+            $(".toastCss").removeClass("show")
+            },2000)
+          }else{
+            $(".close").click()
+            setTimeout(() =>{
+            $(".toastDescription").html("Sorry Quote Not Added...")
+            $(".toastCss").addClass("show")
+            },)
+            setTimeout(() =>{
+            $(".toastCss").removeClass("show")
+            },2000)
+          }
+        });
+        event.preventDefault();
+      });
+      $(".logoutBtn").on('click',function() {
+        var clickedOk = confirm("confirm - Do you want to logout now...");
+        if(clickedOk){
+          window.location.href = "http://localhost:3000/login"
+        };
+      })
+
+      $(".usersMenu").on('click',function() {
+        var formData = {
+          username: $("#username").val(),
+        };
+        console.log("usersMenu")
+        $(".cardAdd").removeClass('d-flex')
+        $(".cardAdd").addClass('d-none')
+        $(".user-menu").removeClass('d-none')
+        $(".user-menu").addClass('d-flex')
+        $.ajax({
+          type:'POST',
+          url:'getUser',
+          data:formData,
+          datatype:'JSON',
+          encode:true
+        }).done(function(data) {
+          getData()
+          console.log(data)
+          $('#username_user').val(data.username)
+          $('#email_user').val(data.email)
+          $('#password_user').val(data.password)
+          $('#id_user').val(data._id)
+        })
+      })
+
+      $("#userUpdate").on('click', function(){
+        console.log('here')
+        id = $("#id_user").val()
+        console.log(id)
+      var formData = {
+        username: $("#username_user").val(),
+        email: $("#email_user").val(),
+        password: $("#password_user").val(),
+          };
+        $.ajax({
+          type:'POST',
+          url:`updateUser/${id}`,
+          data:formData,
+          datatype:'JSON',
+          encode:true
+        }).done(function(data) {
+          getData()
+          console.log(data)
+          if(data.modifiedCount > 0){
+            setTimeout(() =>{
+              $(".toastDescription").html("Congratulations..!!!! Users Updated Successfully")
+              $(".toastCss").addClass("show")
+
+              },)
+              setTimeout(() =>{
+              $(".toastCss").removeClass("show")
+              },2000)
+              $(".cardAdd").removeClass('d-none')
+              $(".cardAdd").addClass('d-flex')
+              $(".user-menu").addClass('d-none')
+              //- $(".cardAdd").addClass('d-flex')
+          }
+        })
+      }) 
+      $(".blogsPart").on('click',function() {
+        $(".cardAdd").removeClass('d-none')
+          $(".cardAdd").addClass('d-flex')
+          $(".user-menu").addClass('d-none')
+      })
+    });

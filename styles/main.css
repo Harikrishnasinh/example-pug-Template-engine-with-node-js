@@ -1,0 +1,20 @@
+body::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+  body {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  #loginCheck{
+    background-color: red;
+  }
+
+  .toastCss{
+    position: absolute;
+    right: 0;
+    z-index: 11111111111000;
+    top: 4rem;
+  }
